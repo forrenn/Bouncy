@@ -18,9 +18,15 @@ void main()
 	
 	SDL_Event ev;
 	std::vector<std::unique_ptr<Shape>> shapes;
-	for (int i = 0; i < 2048; ++i)
+	for (int i = 0; i < 8192; ++i)
 	{
-		shapes.push_back(std::make_unique<Circle>(rand() % w, rand() % h, 1+rand() % 9, rand() % 100 - 50, rand() % 100 - 50));
+		double size = rand() % 10 + 1;
+		double x = size+rand() % int(w - 2*size - 1);
+		double y = size+rand() % int(h - 2*size - 1);
+		double vx = rand() % 50 - 25;
+		double vy = rand() % 50 - 25;
+
+		shapes.push_back(std::make_unique<Circle>(x, y, size, vx, vy));
 	}
 	
 	auto startTime = std::chrono::high_resolution_clock::now();
