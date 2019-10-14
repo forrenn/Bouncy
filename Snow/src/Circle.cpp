@@ -27,9 +27,9 @@ Circle::Circle(double x, double y, double r, double vx, double vy)
 void Circle::draw(SDL_Surface * s)
 {
 	double dr = size * size;
-	for (double y = this->y - size; y < this->y + size; ++y)
+	for (double y = this->y - size; y <= this->y + size; ++y)
 	{
-		for (double x = this->x - size; x < this->x + size; ++x)
+		for (double x = this->x - size; x <= this->x + size; ++x)
 		{
 			double dx = x - this->x;
 			double dy = y - this->y;
