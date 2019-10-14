@@ -1,5 +1,7 @@
 #pragma once
 #include <SDL/SDL.h>
+#include <vector>
+#include <memory>
 
 struct Color
 {
@@ -13,6 +15,6 @@ struct Shape
 	Color c;
 	
 	virtual void draw(SDL_Surface* surf);
-	void updatePos(double dt);
-	virtual void update(double dt);
+	void updatePos(double dt, std::vector<std::unique_ptr<Shape>>& shapes);
+	virtual void update(double dt, std::vector<std::unique_ptr<Shape>>& shapes);
 };
