@@ -12,6 +12,7 @@ struct Shape
 {
 	double x, y;
 	double vx, vy;
+	double size;
 	Color c;
 	
 	virtual void draw(SDL_Surface* surf);
