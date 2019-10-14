@@ -15,6 +15,6 @@ struct Shape
 	Color c;
 	
 	virtual void draw(SDL_Surface* surf);
-	void updatePos(double dt, std::vector<std::unique_ptr<Shape>>& shapes);
-	virtual void update(double dt, std::vector<std::unique_ptr<Shape>>& shapes);
+	void updatePos(double dt, std::vector<std::unique_ptr<Shape>>& shapes, double maxX, double maxY);
+	virtual void update(double dt, std::vector<std::unique_ptr<Shape>>& shapes, double maxX, double max);
 };

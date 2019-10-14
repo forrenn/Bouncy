@@ -39,7 +39,7 @@ void main()
 
 		for (auto& it : shapes)
 		{
-			it->update(dt, shapes);
+			it->update(dt, shapes, w, h);
 			it->draw(windowSurface);
 		}
 		SDL_UpdateWindowSurface(window);
