@@ -2,6 +2,7 @@
 #include <sdl/sdl.h>
 #include <vector>
 #include <memory>
+#include <chrono>
 #include "Circle.h"
 #pragma comment(lib, "SDL2.lib")
 
@@ -18,6 +19,7 @@ void main()
 	SDL_Event ev;
 	std::vector<std::unique_ptr<Shape>> shapes;
 	shapes.push_back(std::make_unique<Circle>(500, 300, 40, 6, -6));
+	auto startTime = std::chrono::high_resolution_clock::now();
 	while (true)
 	{
 		SDL_FillRect(windowSurface, 0, 0);
@@ -26,7 +28,11 @@ void main()
 
 		}
 		
-		double dt = 0.05;
+		auto endTime = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double> dur = endTime - startTime;
+		double dt = dur.count();
+		startTime = endTime;
+
 		for (auto& it : shapes)
 		{
 			it->update(dt);

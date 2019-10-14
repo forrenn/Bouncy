@@ -4,6 +4,7 @@ namespace Helpers
 {
 	static void setPixel(SDL_Surface* s, int x, int y, uint32_t r, uint32_t g, uint32_t b)
 	{
+		if (x < 0 || y < 0 || x >= s->w || y >= s->h) return;
 		SDL_PixelFormat* format = s->format;
 		Uint32 color = 0;
 		color |= b << format->Bshift;
