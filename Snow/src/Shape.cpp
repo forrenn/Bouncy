@@ -32,8 +32,8 @@ void Shape::updatePos(double dt, std::vector<std::unique_ptr<Shape>>& shapes, do
 		double dx = shapes[i]->x - x;
 		double dy = shapes[i]->y - y;
 		double dist = sqrt(dx*dx + dy * dy);
-
-		if (dist <= std::max(size, shapes[i]->size))
+		double r_sum = size + shapes[i]->size;
+		if (dist <= r_sum)
 		{
 			vx = -vx;
 			vy = -vy;
