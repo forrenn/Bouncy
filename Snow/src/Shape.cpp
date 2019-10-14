@@ -26,7 +26,7 @@ void Shape::updatePos(double dt, std::vector<std::unique_ptr<Shape>>& shapes, do
 	}
 	else prev_y = yCopy;
 
-	for (size_t i = 0; i < shapes.size(); ++i)
+	for (size_t i = 0; i < shapes.size(); ++i) //Circle-Circle collision, please refactor in the future (move to Circle)
 	{
 		if (this == shapes[i].get()) continue; //skip self collision
 		double dx = shapes[i]->x - x;

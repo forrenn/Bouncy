@@ -18,9 +18,9 @@ void main()
 	
 	SDL_Event ev;
 	std::vector<std::unique_ptr<Shape>> shapes;
-	for (int i = 0; i < 100; ++i)
+	for (int i = 0; i < 1000; ++i)
 	{
-		double size = rand() % 10 + 1;
+		double size = rand() % 19 + 1;
 		double x = size+rand() % int(w - 2*size - 1);
 		double y = size+rand() % int(h - 2*size - 1);
 		double vx = rand() % 50 - 25;
