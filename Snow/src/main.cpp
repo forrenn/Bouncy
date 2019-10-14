@@ -17,17 +17,19 @@ void main()
 	
 	SDL_Event ev;
 	std::vector<std::unique_ptr<Shape>> shapes;
-	shapes.push_back(std::make_unique<Circle>(500, 300, 40));
+	shapes.push_back(std::make_unique<Circle>(500, 300, 40, 6, -6));
 	while (true)
 	{
+		SDL_FillRect(windowSurface, 0, 0);
 		while (SDL_PollEvent(&ev))
 		{
 
 		}
 		
+		double dt = 0.05;
 		for (auto& it : shapes)
 		{
-			//it.update(dt);
+			it->update(dt);
 			it->draw(windowSurface);
 		}
 		SDL_UpdateWindowSurface(window);

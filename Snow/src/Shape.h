@@ -9,8 +9,10 @@ struct Color
 struct Shape
 {
 	double x, y;
-	double dx, dy;
+	double vx, vy;
 	Color c;
 	
-	virtual void draw(SDL_Surface* surf);	
+	virtual void draw(SDL_Surface* surf);
+	void updatePos(double dt);
+	virtual void update(double dt);
 };

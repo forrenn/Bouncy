@@ -12,6 +12,18 @@ Circle::Circle(double x, double y, double r)
 	this->c.b = rand() % 256;
 }
 
+Circle::Circle(double x, double y, double r, double vx, double vy)
+{
+	this->x = x;
+	this->y = y;
+	this->radius = r;
+	this->vx = vx;
+	this->vy = vy;
+	this->c.r = rand() % 256;
+	this->c.g = rand() % 256;
+	this->c.b = rand() % 256;
+}
+
 void Circle::draw(SDL_Surface * s)
 {
 	double dr = radius * radius * 0.25;
