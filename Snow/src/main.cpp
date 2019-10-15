@@ -23,10 +23,12 @@ void main()
 		double size = rand() % 19 + 1;
 		double x = size+rand() % int(w - 2*size - 1);
 		double y = size+rand() % int(h - 2*size - 1);
+		double z = 1 + rand()/double(RAND_MAX);
+		double vz = rand() / double(RAND_MAX) / 5;
 		double vx = rand() % 500 - 250;
 		double vy = rand() % 500 - 250;
 
-		shapes.push_back(std::make_unique<Circle>(x, y, size, vx, vy));
+		shapes.push_back(std::make_unique<Circle>(x, y, z, size, vx, vy, vz));
 	}
 	
 	auto startTime = std::chrono::high_resolution_clock::now();

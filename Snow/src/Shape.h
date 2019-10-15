@@ -10,8 +10,8 @@ struct Color
 
 struct Shape
 {
-	double x, y;
-	double vx, vy;
+	double x, y, z;
+	double vx, vy, vz;
 	double size;
 	Color c;
 	double prev_x, prev_y;
