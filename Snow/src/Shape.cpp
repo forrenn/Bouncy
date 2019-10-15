@@ -1,30 +1,31 @@
 #include "Shape.h"
 #include <algorithm>
+#include "Globals.h"
 void Shape::draw(SDL_Surface * surf)
 {
 
 }
 
-void Shape::updatePos(double dt, std::vector<std::unique_ptr<Shape>>& shapes, double maxX, double maxY)
+void Shape::updatePos(double dt)
 {
 	vy += 98.1*dt; //gravity
 	double xCopy = x;
 	double yCopy = y;
 	this->x += vx * dt;
 	this->y += vy * dt;
-	if (x + size > maxX || x - size < 0)
+	if (x + size > SCREEN_WIDTH || x - size < 0)
 	{
 		vx = -vx;
 		x = prev_x;
-		onWallCollision(shapes, maxX, maxY);
+		onWallCollision();
 	}
 	else prev_x = xCopy;
 	
-	if (y + size > maxY || y - size < 0)
+	if (y + size > SCREEN_HEIGHT || y - size < 0)
 	{
 		vy = -vy;
 		y = prev_y;
-		onWallCollision(shapes, maxX, maxY);
+		onWallCollision();
 	}
 	else prev_y = yCopy;
 
@@ -46,11 +47,11 @@ void Shape::updatePos(double dt, std::vector<std::unique_ptr<Shape>>& shapes, do
 	}*/
 }
 
-void Shape::update(double dt, std::vector<std::unique_ptr<Shape>>& shapes, double maxX, double maxY)
+void Shape::update(double dt)
 {
-	updatePos(dt, shapes, maxX, maxY);
+	updatePos(dt);
 }
 
-void Shape::onWallCollision(std::vector<std::unique_ptr<Shape>>& shapes, double maxX, double max)
+void Shape::onWallCollision()
 {
 }

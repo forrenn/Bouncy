@@ -3,6 +3,7 @@
 #include "Rectangle.h"
 #include <memory>
 #include <algorithm>
+#include "Globals.h"
 
 Circle::Circle(double x, double y, double r)
 {
@@ -41,7 +42,7 @@ void Circle::draw(SDL_Surface * s)
 	}
 }
 
-void Circle::onWallCollision(std::vector<std::unique_ptr<Shape>>& shapes, double maxX, double max)
+void Circle::onWallCollision()
 {
 	vx *= 0.7;
 	vy *= 0.7;
@@ -92,7 +93,7 @@ void Circle::onWallCollision(std::vector<std::unique_ptr<Shape>>& shapes, double
 			child.c.g = c.g - i*size;
 			child.c.b = c.b - i*size;
 
-			shapes.push_back(std::make_unique<Circle>(child));
+			SHAPES.push_back(std::make_shared<Circle>(child));
 		}
 		this->size = 0;
 		collisionEnabled = false;

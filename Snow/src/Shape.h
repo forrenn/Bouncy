@@ -18,7 +18,7 @@ struct Shape
 	bool collisionEnabled = true;
 
 	virtual void draw(SDL_Surface* surf);
-	void updatePos(double dt, std::vector<std::unique_ptr<Shape>>& shapes, double maxX, double maxY);
-	virtual void update(double dt, std::vector<std::unique_ptr<Shape>>& shapes, double maxX, double max);
-	virtual void onWallCollision(std::vector<std::unique_ptr<Shape>>& shapes, double maxX, double max);
+	void updatePos(double dt);
+	virtual void update(double dt);
+	virtual void onWallCollision();
 };
