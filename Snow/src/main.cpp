@@ -23,8 +23,8 @@ void main()
 		double size = rand() % 19 + 1;
 		double x = size+rand() % int(w - 2*size - 1);
 		double y = size+rand() % int(h - 2*size - 1);
-		double vx = rand() % 50 - 25;
-		double vy = rand() % 50 - 25;
+		double vx = rand() % 500 - 250;
+		double vy = rand() % 500 - 250;
 
 		shapes.push_back(std::make_unique<Circle>(x, y, size, vx, vy));
 	}
