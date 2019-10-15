@@ -18,8 +18,8 @@ void main()
 	
 	SDL_Event ev;
 	std::vector<std::unique_ptr<Shape>> shapes;
-	shapes.reserve(100*1000*1000);
-	for (int i = 0; i < 100; ++i)
+	//shapes.reserve(100*1000*1000);
+	for (int i = 0; i < 1000; ++i)
 	{
 		double size = rand() % 19 + 1;
 		double x = size+rand() % int(w - 2*size - 1);
@@ -49,12 +49,10 @@ void main()
 		double dt = dur.count();
 		startTime = endTime;
 
-		int i = 0;
-		for (auto& it : shapes)
+		for (size_t i = 0; i < shapes.size(); ++i)
 		{
-			it->update(dt, shapes, w, h);
-			it->draw(windowSurface);
-			++i;
+			shapes[i]->update(dt, shapes, w, h);
+			shapes[i]->draw(windowSurface);
 		}
 		SDL_UpdateWindowSurface(window);
 	}
