@@ -16,6 +16,7 @@ void Shape::updatePos(double dt, std::vector<std::unique_ptr<Shape>>& shapes, do
 	{
 		vx = -vx;
 		x = prev_x;
+		onWallCollision(shapes, maxX, maxY);
 	}
 	else prev_x = xCopy;
 	

@@ -18,7 +18,8 @@ void main()
 	
 	SDL_Event ev;
 	std::vector<std::unique_ptr<Shape>> shapes;
-	for (int i = 0; i < 1000; ++i)
+	shapes.reserve(100*1000*1000);
+	for (int i = 0; i < 100; ++i)
 	{
 		double size = rand() % 19 + 1;
 		double x = size+rand() % int(w - 2*size - 1);
@@ -28,6 +29,11 @@ void main()
 
 		shapes.push_back(std::make_unique<Circle>(x, y, size, vx, vy));
 	}
+
+	/*Circle c(w / 2, h / 2, 20, 0, -100);
+	//c.collisionEnabled = false;
+	c.c = { 255,255,255 };
+	shapes.push_back(std::make_unique<Circle>(c));*/
 	
 	auto startTime = std::chrono::high_resolution_clock::now();
 	while (true)
@@ -43,10 +49,12 @@ void main()
 		double dt = dur.count();
 		startTime = endTime;
 
+		int i = 0;
 		for (auto& it : shapes)
 		{
 			it->update(dt, shapes, w, h);
 			it->draw(windowSurface);
+			++i;
 		}
 		SDL_UpdateWindowSurface(window);
 	}

@@ -5,5 +5,6 @@ struct Circle : Shape
 	Circle(double x, double y, double r);
 	Circle(double x, double y, double r, double vx, double vy);
 
-	void draw(SDL_Surface* s) override;
+	virtual void draw(SDL_Surface* s);
+	virtual void onWallCollision(std::vector<std::unique_ptr<Shape>>& shapes, double maxX, double max);
 };
