@@ -95,7 +95,6 @@ void Circle::onWallCollision()
 
 			SHAPES.push_back(std::make_shared<Circle>(child));
 		}
-		this->size = 0;
-		collisionEnabled = false;
+		this->markForDeletion();
 	}
 }

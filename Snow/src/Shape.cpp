@@ -55,3 +55,8 @@ void Shape::update(double dt)
 void Shape::onWallCollision()
 {
 }
+
+void Shape::markForDeletion()
+{
+	*euthanasiaPlug = true;
+}

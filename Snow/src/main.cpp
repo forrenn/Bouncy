@@ -51,9 +51,19 @@ void main()
 
 		for (size_t i = 0; i < SHAPES.size(); ++i)
 		{
+			bool remove = false;
+			SHAPES[i]->euthanasiaPlug = &remove;
 			SHAPES[i]->update(dt);
 			SHAPES[i]->draw(windowSurface);
+
+			if (remove)
+			{
+				SHAPES[i].swap(*(SHAPES.end() - 1));
+				SHAPES.pop_back();
+				--i;
+			}
 		}
+		
 		SDL_UpdateWindowSurface(window);
 	}
 	

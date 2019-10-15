@@ -16,9 +16,13 @@ struct Shape
 	Color c = { 0,0,0 };
 	double prev_x = 0, prev_y = 0;
 	bool collisionEnabled = true;
+	size_t tmp_myIndex = 0;
+	bool* euthanasiaPlug;
 
 	virtual void draw(SDL_Surface* surf);
 	void updatePos(double dt);
 	virtual void update(double dt);
 	virtual void onWallCollision();
+
+	void markForDeletion();
 };
