@@ -23,6 +23,7 @@ void Shape::updatePos(double dt, std::vector<std::unique_ptr<Shape>>& shapes, do
 	{
 		vy = -vy;
 		y = prev_y;
+		onWallCollision(shapes, maxX, maxY);
 	}
 	else prev_y = yCopy;
 
@@ -47,4 +48,8 @@ void Shape::updatePos(double dt, std::vector<std::unique_ptr<Shape>>& shapes, do
 void Shape::update(double dt, std::vector<std::unique_ptr<Shape>>& shapes, double maxX, double maxY)
 {
 	updatePos(dt, shapes, maxX, maxY);
+}
+
+void Shape::onWallCollision(std::vector<std::unique_ptr<Shape>>& shapes, double maxX, double max)
+{
 }
