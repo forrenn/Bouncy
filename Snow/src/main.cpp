@@ -6,12 +6,17 @@
 #include "Circle.h"
 #include "Globals.h"
 #include <chrono>
+#include <algorithm>
 #pragma comment(lib, "SDL2.lib")
 
 #undef main
 
 void main()
 {
+	int benchmarkMode = 0;
+	std::cout << "Run benchmark? 1 = yes, 0 = no: ";
+	std::cin >> benchmarkMode;
+
 	SCREEN_WIDTH = 1280;
 	SCREEN_HEIGHT = 720;
 	SDL_Window* window = SDL_CreateWindow("Snow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
@@ -20,20 +25,25 @@ void main()
 	
 	SDL_Event ev;
 
-	for (int i = 0; i < 1000; ++i)
+	if (!benchmarkMode)
 	{
-		double size = rand() % 19 + 1;
-		double x = size+rand() % int(SCREEN_WIDTH - 2*size - 1);
-		double y = size+rand() % int(SCREEN_HEIGHT - 2*size - 1);
-		double vx = rand() % 500 - 250;
-		double vy = rand() % 500 - 250;
+		for (int i = 0; i < 1000; ++i)
+		{
+			double size = rand() % 19 + 1;
+			double x = size + rand() % int(SCREEN_WIDTH - 2 * size - 1);
+			double y = size + rand() % int(SCREEN_HEIGHT - 2 * size - 1);
+			double vx = rand() % 500 - 250;
+			double vy = rand() % 500 - 250;
 
-		SHAPES.push_back(std::make_unique<Circle>(x, y, size, vx, vy));
+			SHAPES.push_back(std::make_unique<Circle>(x, y, size, vx, vy));
+		}
 	}
-
-	/*Circle c(SCREEN_WIDTH/ 2, SCREEN_HEIGHT / 2, 200, 0, -100);
-	c.c = { 255,255,255 };
-	SHAPES.push_back(std::make_unique<Circle>(c));*/
+	else
+	{
+		Circle c(SCREEN_WIDTH/ 2, SCREEN_HEIGHT / 2, 200, 0, -100);
+		c.c = { 255,255,255 };
+		SHAPES.push_back(std::make_unique<Circle>(c));
+	}
 	
 	auto startTime = std::chrono::high_resolution_clock::now();
 	double fpsCounterAccumulator = 0;
@@ -80,6 +90,8 @@ void main()
 
 			std::cout << fps << " FPS" << "\n";
 		}
+
+		std::sort(SHAPES.begin(), SHAPES.end()); //improves performance BY A LOT. Do not remove.
 		
 	}
 	
