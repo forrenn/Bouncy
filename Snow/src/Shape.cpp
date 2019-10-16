@@ -10,12 +10,12 @@ void Shape::updatePos(double dt)
 {
 	if (!isActive) return;
 
-	if (abs(vx) + abs(vy) < SPEED_CUTOFF)
+	/*if ((abs(vx) + abs(vy)) < SPEED_CUTOFF && (abs(y)+abs(size)) < 1)
 	{
 		this->isActive = false;
 		vx = 0;
 		vy = 0;
-	}
+	}*/
 
 	vy += GRAVITY*dt; //gravity
 	double xCopy = x;

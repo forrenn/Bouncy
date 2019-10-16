@@ -10,3 +10,4 @@ extern const double SPEED_CUTOFF;
 extern double FPS_COUNTER_REFRESH_INTERVAL;
 extern int CIRCLE_SPLIT_MULT;
 extern double GRAVITY;
+extern const double BENCHMARK_TIME_STEP;

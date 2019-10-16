@@ -14,6 +14,7 @@
 void main()
 {
 	int benchmarkMode = 0;
+	std::cout.precision(15);
 	std::cout << "Run benchmark? 1 = yes, 0 = no: ";
 	std::cin >> benchmarkMode;
 
@@ -45,11 +46,13 @@ void main()
 		SHAPES.push_back(std::make_unique<Circle>(c));
 	}
 	
-	auto startTime = std::chrono::high_resolution_clock::now();
 	double fpsCounterAccumulator = 0;
 	uint64_t frameCounter = 0;
 	uint64_t lastShownFrameCounter = 0;
-	while (true)
+	bool running = true;
+	auto startTime = std::chrono::high_resolution_clock::now();
+	auto applicationStartTime = startTime;
+	while (running)
 	{
 		SDL_FillRect(windowSurface, 0, 0);
 		while (SDL_PollEvent(&ev))
@@ -59,15 +62,17 @@ void main()
 		
 		auto endTime = std::chrono::high_resolution_clock::now();
 		std::chrono::duration<double> dur = endTime - startTime;
-		double dt = dur.count();
+		double dt = dur.count();		
 		startTime = endTime;
 
+		double dtLocal = dt;
+		if (benchmarkMode) dtLocal = BENCHMARK_TIME_STEP;
 		for (size_t i = 0; i < SHAPES.size(); ++i) //DO NOT change to range-based for. Vector resizing breaks it.
 		{
 			//ALWAYS use indexed access, because Shape::update can push to SHAPES
 			bool remove = false;
 			SHAPES[i]->euthanasiaPlug = &remove;
-			SHAPES[i]->update(dt);
+			SHAPES[i]->update(dtLocal);
 			SHAPES[i]->draw(windowSurface);
 
 			if (remove)
@@ -91,9 +96,31 @@ void main()
 			std::cout << fps << " FPS" << "\n";
 		}
 
+#ifdef NDEBUG
 		std::sort(SHAPES.begin(), SHAPES.end()); //improves performance BY A LOT. Do not remove.
-		
+#endif // NDEBUG	
+
+		if (benchmarkMode)
+		{
+			bool foundActive = false;
+			for (const auto& it : SHAPES)
+			{
+				if (it->isActive)
+				{
+					foundActive = true;
+					break;
+				}
+			}
+			running = foundActive;
+		}
 	}
+
+	auto applicationEndTime = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> appDur = applicationEndTime - applicationStartTime;
+	double runTime = appDur.count();
+	double avgFps = frameCounter/runTime;
+
+	std::cout << "Rendered " << frameCounter << " frames in " << runTime << " sec (" << avgFps << " FPS)\n";
 	
 	system("pause");
 }

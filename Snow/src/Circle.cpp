@@ -74,7 +74,12 @@ void Circle::onWallCollision()
 		size -= sqrt(piecesTrunc);*/
 
 		Circle child(prev_x, prev_y, size, vx, vy);
-		if (size < 1) return;
+		if (size < 1)
+		{
+			this->isActive = abs(vx) + abs(vy) < SPEED_CUTOFF && y < 1;
+			return;
+		}
+		
 		size /= sqrt(CIRCLE_SPLIT_MULT);
 		child.size = size;
 		//child.collisionEnabled = false;

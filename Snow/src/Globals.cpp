@@ -8,3 +8,4 @@ const double SPEED_CUTOFF = 1e-9;
 double FPS_COUNTER_REFRESH_INTERVAL = 1;
 int CIRCLE_SPLIT_MULT = 2;
 double GRAVITY = 100;
+const double BENCHMARK_TIME_STEP = 1.0/60;
