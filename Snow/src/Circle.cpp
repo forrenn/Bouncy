@@ -75,20 +75,20 @@ void Circle::onWallCollision()
 
 		Circle child(prev_x, prev_y, size, vx, vy);
 		if (size < 1) return;
-		size /= 2;
+		size /= sqrt(CIRCLE_SPLIT_MULT);
 		child.size = size;
 		//child.collisionEnabled = false;
 	
 		child.prev_x = prev_x;
 		child.prev_y = prev_y;
 		double totalSpeed = sqrt(vx*vx + vy * vy);
-		for (int i = 0; i < 4; ++i)
+		for (int i = 0; i < CIRCLE_SPLIT_MULT; ++i)
 		{
 			double angle = rand() / double(RAND_MAX) * 2 * M_PI;
 			double x_mult = cos(angle);
 			double y_mult = sin(angle);
-			child.vx = totalSpeed * x_mult;
-			child.vy = totalSpeed * y_mult;
+			child.vx = totalSpeed * x_mult * (1.0/ 0.7);
+			child.vy = totalSpeed * y_mult * (1.0/ 0.7);
 			child.c.r = c.r - i*size;
 			child.c.g = c.g - i*size;
 			child.c.b = c.b - i*size;
