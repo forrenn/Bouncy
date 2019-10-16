@@ -49,6 +49,7 @@ void main()
 	double benchmarkFpsAccumulator = 0;
 	for (int benchmarkPass = 0; benchmarkPass < benchmarkPasses; ++benchmarkPass)
 	{
+		SHAPES.clear();
 		if (!benchmarkMode)
 		{
 			for (int i = 0; i < 1000; ++i)
@@ -143,7 +144,7 @@ void main()
 		double runTime = appDur.count();
 		double avgFps = frameCounter / runTime;
 
-		std::cout << "Pass " << benchmarkPass << ": Rendered " << frameCounter << " frames in " << runTime << " sec (" << avgFps << " FPS)\n";
+		std::cout << "Pass " << benchmarkPass+1 << ": Rendered " << frameCounter << " frames in " << runTime << " sec (" << avgFps << " FPS)\n";
 		benchmarkFpsAccumulator += avgFps;
 	}
 
