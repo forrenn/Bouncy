@@ -16,7 +16,6 @@ struct Shape
 	Color c = { 0,0,0 };
 	double prev_x = 0, prev_y = 0;
 	bool collisionEnabled = true;
-	size_t tmp_myIndex = 0;
 	bool* euthanasiaPlug;
 	bool isActive = true; //false disables all the processing for this Shape
 
