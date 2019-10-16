@@ -10,6 +10,13 @@ void Shape::updatePos(double dt)
 {
 	if (!isActive) return;
 
+	if (abs(vx) + abs(vy) < SPEED_CUTOFF)
+	{
+		this->isActive = false;
+		vx = 0;
+		vy = 0;
+	}
+
 	vy += GRAVITY*dt; //gravity
 	double xCopy = x;
 	double yCopy = y;
@@ -30,7 +37,7 @@ void Shape::updatePos(double dt)
 		onWallCollision();
 	}
 	else prev_y = yCopy;
-
+	
 	/*for (size_t i = 0; i < SHAPES.size(); ++i) //Circle-Circle collision, please refactor in the future (move to Circle)
 	{
 		if (this == SHAPES[i].get()) continue; //skip self collision
