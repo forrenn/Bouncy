@@ -18,6 +18,7 @@ struct Shape
 	bool collisionEnabled = true;
 	size_t tmp_myIndex = 0;
 	bool* euthanasiaPlug;
+	bool isActive = true; //false disables all the processing for this Shape
 
 	virtual void draw(SDL_Surface* surf);
 	void updatePos(double dt);

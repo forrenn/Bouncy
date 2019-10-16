@@ -8,7 +8,8 @@ void Shape::draw(SDL_Surface * surf)
 
 void Shape::updatePos(double dt)
 {
-	vy += 98.1*dt; //gravity
+	if (!isActive) return;
+	vy += GRAVITY*dt; //gravity
 	double xCopy = x;
 	double yCopy = y;
 	this->x += vx * dt;
