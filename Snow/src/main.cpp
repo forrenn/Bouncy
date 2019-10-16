@@ -18,25 +18,31 @@ void main()
 	std::cout << "Run benchmark? 1 = yes, 0 = no: ";
 	std::cin >> benchmarkMode;
 
+	SCREEN_WIDTH = DEFAULT_SCREEN_WIDTH;
+	SCREEN_HEIGHT = DEFAULT_SCREEN_HEIGHT;
 	int benchmarkPasses = 1;
 	int benchmarkVisible = 1;  //benchmarkVisible is a misnomer. It is just a visibiliy switch, turned on by default, but option to change it is only given in benchmark mode;
 	if (benchmarkMode)
 	{
+		SCREEN_WIDTH = BENCHMARK_DEFAULT_SCREEN_WIDTH;
+		SCREEN_HEIGHT = BENCHMARK_DEFAULT_SCREEN_HEIGHT;
 		std::cout << "Benchmark passes: ";
 		std::cin >> benchmarkPasses;
 		std::cout << "Render to the screen? 1 = yes, 0 = no: ";
 		std::cin >> benchmarkVisible;
 	}
-
-	SCREEN_WIDTH = DEFAULT_SCREEN_WIDTH;
-	SCREEN_HEIGHT = DEFAULT_SCREEN_HEIGHT;
-	if (benchmarkMode)
+	else
 	{
-		SCREEN_WIDTH = BENCHMARK_DEFAULT_SCREEN_WIDTH;
-		SCREEN_HEIGHT = BENCHMARK_DEFAULT_SCREEN_HEIGHT;
+		int w = 0, h = 0;
+		std::cout << "Enter desired screen width (0 = default value of " << DEFAULT_SCREEN_WIDTH <<"): ";
+		std::cin >> w;
+		std::cout << "Enter desired screen height (0 = default value of " << DEFAULT_SCREEN_HEIGHT << "): ";
+		std::cin >> h;
+		SCREEN_WIDTH = (w == 0) ? DEFAULT_SCREEN_WIDTH : w;
+		SCREEN_HEIGHT = (h == 0) ? DEFAULT_SCREEN_HEIGHT : h;
 	}
-	SDL_Window* window = SDL_CreateWindow("Snow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
+	SDL_Window* window = SDL_CreateWindow("Snow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 	SDL_Surface* windowSurface = SDL_GetWindowSurface(window);
 	
 	SDL_Event ev;
@@ -71,7 +77,7 @@ void main()
 		auto applicationStartTime = startTime;
 		while (running)
 		{
-			if (benchmarkVisible) SDL_FillRect(windowSurface, 0, 0); //benchmarkVisible is a misnomer. It is just a visibiliy switch, turned on by default, but option to change it is only given in benchmark mode;
+			if (benchmarkVisible) SDL_FillRect(windowSurface, 0, 0);
 			while (SDL_PollEvent(&ev))
 			{
 				if (ev.type == SDL_QUIT) return;
@@ -87,10 +93,10 @@ void main()
 			for (size_t i = 0; i < SHAPES.size(); ++i) //DO NOT change to range-based for. Vector resizing breaks it.
 			{
 				//ALWAYS use indexed access, because Shape::update can push to SHAPES
-				bool remove = false;
+				bool remove = false; //maybe refactor into std::vector<uint8_t> (bool won't play nice with euthanasia-like ask for removal) and handle removal post-frame for ease of multithreading?
 				SHAPES[i]->euthanasiaPlug = &remove;
 				SHAPES[i]->update(dtLocal);
-				if (benchmarkVisible) SHAPES[i]->draw(windowSurface);  //benchmarkVisible is a misnomer. It is just a visibiliy switch, turned on by default, but option to change it is only given in benchmark mode;
+				if (benchmarkVisible) SHAPES[i]->draw(windowSurface);
 
 				if (remove)
 				{
@@ -100,7 +106,7 @@ void main()
 				}
 			}
 
-			if (benchmarkVisible) SDL_UpdateWindowSurface(window);  //benchmarkVisible is a misnomer. It is just a visibiliy switch, turned on by default, but option to change it is only given in benchmark mode;
+			if (benchmarkVisible) SDL_UpdateWindowSurface(window);
 			++frameCounter;
 			fpsCounterAccumulator += dt;
 			if (fpsCounterAccumulator >= FPS_COUNTER_REFRESH_INTERVAL)
@@ -114,7 +120,7 @@ void main()
 			}
 
 #ifdef NDEBUG
-			std::sort(SHAPES.begin(), SHAPES.end()); //improves performance BY A LOT. Do not remove.
+			std::sort(SHAPES.begin(), SHAPES.end()); //improves performance BY A LOT (but only in Release builds). Do not remove.
 #endif // NDEBUG	
 
 			if (benchmarkMode)
