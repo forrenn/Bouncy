@@ -9,6 +9,7 @@ void Shape::draw(SDL_Surface * surf)
 void Shape::updatePos(double dt)
 {
 	if (!isActive) return;
+
 	vy += GRAVITY*dt; //gravity
 	double xCopy = x;
 	double yCopy = y;
@@ -30,20 +31,20 @@ void Shape::updatePos(double dt)
 	}
 	else prev_y = yCopy;
 
-	/*for (size_t i = 0; i < shapes.size(); ++i) //Circle-Circle collision, please refactor in the future (move to Circle)
+	/*for (size_t i = 0; i < SHAPES.size(); ++i) //Circle-Circle collision, please refactor in the future (move to Circle)
 	{
-		if (this == shapes[i].get()) continue; //skip self collision
-		double dx = shapes[i]->x - x;
-		double dy = shapes[i]->y - y;
+		if (this == SHAPES[i].get()) continue; //skip self collision
+		double dx = SHAPES[i]->x - x;
+		double dy = SHAPES[i]->y - y;
 		double dist2 = dx * dx + dy * dy;
-		double r_sum = size + shapes[i]->size;
+		double r_sum = size + SHAPES[i]->size;
 		r_sum *= r_sum;
 		if (dist2 <= r_sum)
 		{
 			vx = -vx;
 			vy = -vy;
-			shapes[i]->vx = -shapes[i]->vx;
-			shapes[i]->vy = -shapes[i]->vy;
+			SHAPES[i]->vx = -SHAPES[i]->vx;
+			SHAPES[i]->vy = -SHAPES[i]->vy;
 		}
 	}*/
 }

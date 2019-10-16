@@ -20,7 +20,7 @@ void main()
 	
 	SDL_Event ev;
 
-	/*for (int i = 0; i < 1000; ++i)
+	for (int i = 0; i < 1000; ++i)
 	{
 		double size = rand() % 19 + 1;
 		double x = size+rand() % int(SCREEN_WIDTH - 2*size - 1);
@@ -29,12 +29,11 @@ void main()
 		double vy = rand() % 500 - 250;
 
 		SHAPES.push_back(std::make_unique<Circle>(x, y, size, vx, vy));
-	}*/
+	}
 
-	Circle c(SCREEN_WIDTH/ 2, SCREEN_HEIGHT / 2, 200, 0, -100);
-	//c.collisionEnabled = false;
+	/*Circle c(SCREEN_WIDTH/ 2, SCREEN_HEIGHT / 2, 200, 0, -100);
 	c.c = { 255,255,255 };
-	SHAPES.push_back(std::make_unique<Circle>(c));
+	SHAPES.push_back(std::make_unique<Circle>(c));*/
 	
 	auto startTime = std::chrono::high_resolution_clock::now();
 	double fpsCounterAccumulator = 0;
