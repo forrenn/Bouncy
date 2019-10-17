@@ -120,9 +120,9 @@ void main()
 				std::cout << fps << " FPS" << "\n";
 			}
 
-#ifdef NDEBUG
+#ifdef RELEASE
 			std::sort(SHAPES.begin(), SHAPES.end()); //improves performance BY A LOT (but only in Release builds). Do not remove.
-#endif // NDEBUG	
+#endif // RELEASE	
 
 			if (benchmarkMode)
 			{
