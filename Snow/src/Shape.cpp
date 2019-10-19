@@ -65,6 +65,16 @@ void Shape::onWallCollision()
 {
 }
 
+double Shape::mass()
+{
+	return density * area();
+}
+
+double Shape::area()
+{
+	return 0.0;
+}
+
 void Shape::markForDeletion()
 {
 	*euthanasiaPlug = true;

@@ -13,6 +13,7 @@ struct Shape
 	double x = 0, y = 0;
 	double vx = 0, vy = 0;
 	double size = 0;
+	double density = 0;
 	Color c = { 0,0,0 };
 	double prev_x = 0, prev_y = 0;
 	bool collisionEnabled = true;
@@ -23,6 +24,8 @@ struct Shape
 	void updatePos(double dt);
 	virtual void update(double dt);
 	virtual void onWallCollision();
+	virtual double mass();
+	virtual double area();
 
 	void markForDeletion();
 };

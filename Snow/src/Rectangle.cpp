@@ -14,3 +14,13 @@ void Rectangle::draw(SDL_Surface * surf)
 		}
 	}
 }
+
+double Rectangle::width()
+{
+	return size;
+}
+
+double Rectangle::area()
+{
+	return width()*height;
+}

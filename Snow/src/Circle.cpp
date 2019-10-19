@@ -103,3 +103,8 @@ void Circle::onWallCollision()
 		this->markForDeletion();
 	}
 }
+
+double Circle::area()
+{
+	return M_PI * size*size;
+}

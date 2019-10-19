@@ -7,4 +7,5 @@ struct Circle : Shape
 
 	virtual void draw(SDL_Surface* s);
 	virtual void onWallCollision();
+	virtual double area();
 };
