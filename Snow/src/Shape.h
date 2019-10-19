@@ -26,6 +26,10 @@ struct Shape
 	virtual void onWallCollision();
 	virtual double mass();
 	virtual double area();
+	double velocity();
+	double velocity_squared();
+	double energy();
+	double momentum();
 
 	void markForDeletion();
 };

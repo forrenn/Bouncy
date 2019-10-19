@@ -75,6 +75,26 @@ double Shape::area()
 	return 0.0;
 }
 
+double Shape::velocity()
+{
+	return sqrt(velocity_squared());
+}
+
+double Shape::velocity_squared()
+{
+	return vx * vx + vy * vy;
+}
+
+double Shape::energy()
+{
+	return mass()*velocity_squared(); //*0.5 omitted on purpose - there's no need for it
+}
+
+double Shape::momentum()
+{
+	return mass()*velocity();
+}
+
 void Shape::markForDeletion()
 {
 	*euthanasiaPlug = true;
