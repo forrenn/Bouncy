@@ -17,7 +17,8 @@ void Shape::updatePos(double dt)
 		vy = 0;
 	}*/
 
-	vy += GRAVITY*dt; //gravity
+	lastUpdateGravityVyDelta = GRAVITY * dt;
+	vy += lastUpdateGravityVyDelta; //gravity
 	double xCopy = x;
 	double yCopy = y;
 	this->x += vx * dt;

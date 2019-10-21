@@ -76,7 +76,7 @@ void Circle::onWallCollision()
 		Circle child(prev_x, prev_y, size, vx, vy);
 		if (size < 1)
 		{
-			this->isActive = abs(vx) + abs(vy) < SPEED_CUTOFF && y < 1;
+			this->isActive = ((abs(vx) + abs(vy-lastUpdateGravityVyDelta)) >= SPEED_CUTOFF) && (y > 1);
 			return;
 		}
 		

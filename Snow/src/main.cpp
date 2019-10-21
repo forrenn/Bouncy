@@ -107,6 +107,11 @@ void main()
 				}
 			}
 
+			/*double avg_vy_acc = 0;
+			for (auto& it : SHAPES)
+				avg_vy_acc += abs(it->vy);
+			std::cout << "Avg |vy|: " << avg_vy_acc / SHAPES.size() << "\n";*/
+
 			if (benchmarkVisible) SDL_UpdateWindowSurface(window);
 			++frameCounter;
 			fpsCounterAccumulator += dt;
