@@ -65,14 +65,14 @@ void main()
 				c.c.b = rand() % 256;
 				c.gravityMult = 0.3 + (1.4*rand() / RAND_MAX);
 
-				SHAPES.push_back(std::make_unique<Circle>(c));
+				SHAPES.push_back(std::make_shared<Circle>(c));
 			}
 		}
 		else
 		{
 			Circle c(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 200, 0, -100);
 			c.c = { 255,255,255 };
-			SHAPES.push_back(std::make_unique<Circle>(c));
+			SHAPES.push_back(std::make_shared<Circle>(c));
 		}
 
 		double fpsCounterAccumulator = 0;
