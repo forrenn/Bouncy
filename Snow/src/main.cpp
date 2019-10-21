@@ -42,7 +42,7 @@ void main()
 		SCREEN_HEIGHT = (h == 0) ? DEFAULT_SCREEN_HEIGHT : h;
 	}
 
-	SDL_Window* window = SDL_CreateWindow("Snow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+	SDL_Window* window = SDL_CreateWindow("Bouncy", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 	SDL_Surface* windowSurface = SDL_GetWindowSurface(window);
 	
 	SDL_Event ev;
