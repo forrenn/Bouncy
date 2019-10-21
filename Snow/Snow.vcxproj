@@ -38,6 +38,7 @@
     <ProjectGuid>{F4A97306-5F27-4794-BEFF-07F5B01901AF}</ProjectGuid>
     <RootNamespace>Snow</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <ProjectName>Bouncy</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
