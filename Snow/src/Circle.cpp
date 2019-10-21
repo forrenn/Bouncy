@@ -73,7 +73,7 @@ void Circle::onWallCollision()
 
 		size -= sqrt(piecesTrunc);*/
 
-		Circle child(prev_x, prev_y, size, vx, vy);
+		Circle child(*this);
 		if (size < 1)
 		{
 			this->isActive = ((abs(vx) + abs(vy-lastUpdateGravityVyDelta)) >= SPEED_CUTOFF) && (y > 1);
@@ -82,18 +82,15 @@ void Circle::onWallCollision()
 		
 		size /= sqrt(CIRCLE_SPLIT_MULT);
 		child.size = size;
-		//child.collisionEnabled = false;
-	
-		child.prev_x = prev_x;
-		child.prev_y = prev_y;
+
 		double totalSpeed = sqrt(vx*vx + vy * vy);
 		for (int i = 0; i < CIRCLE_SPLIT_MULT; ++i)
 		{
 			double angle = rand() / double(RAND_MAX) * 2 * M_PI;
 			double x_mult = cos(angle);
 			double y_mult = sin(angle);
-			child.vx = totalSpeed * x_mult * (1.0/ 0.7);
-			child.vy = totalSpeed * y_mult * (1.0/ 0.7);
+			child.vx = totalSpeed * x_mult * (1.0 / 0.7);
+			child.vy = totalSpeed * y_mult * (1.0 / 0.7);
 			child.c.r = c.r - i*size;
 			child.c.g = c.g - i*size;
 			child.c.b = c.b - i*size;
