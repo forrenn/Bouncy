@@ -14,8 +14,10 @@ struct Shape
 	double vx = 0, vy = 0;
 	double size = 0;
 	double density = 0;
-	Color c = { 0,0,0 };
 	double prev_x = 0, prev_y = 0;
+	double gravityMult = 1;
+	Color c = { 0,0,0 };
+	
 	bool collisionEnabled = true;
 	bool* euthanasiaPlug;
 	bool isActive = true; //false disables all the processing for this Shape
@@ -33,5 +35,5 @@ struct Shape
 
 	void markForDeletion();
 protected:
-	double lastUpdateGravityVyDelta = 0;
+	double lastUpdateGravityVyDelta = 0; 
 };
