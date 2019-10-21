@@ -54,13 +54,18 @@ void main()
 		{
 			for (int i = 0; i < 1000; ++i)
 			{
-				double size = rand() % 19 + 1;
-				double x = size + rand() % int(SCREEN_WIDTH - 2 * size - 1);
-				double y = size + rand() % int(SCREEN_HEIGHT - 2 * size - 1);
-				double vx = rand() % 500 - 250;
-				double vy = rand() % 500 - 250;
+				Circle c;
+				c.size = rand() % 19 + 1;
+				c.x = c.size + rand() % int(SCREEN_WIDTH - 2 * c.size - 1);
+				c.y = c.size + rand() % int(SCREEN_HEIGHT - 2 * c.size - 1);
+				c.vx = rand() % 500 - 250;
+				c.vy = rand() % 500 - 250;
+				c.c.r = rand() % 256;
+				c.c.g = rand() % 256;
+				c.c.b = rand() % 256;
+				c.gravityMult = 0.3 + (1.4*rand() / RAND_MAX);
 
-				SHAPES.push_back(std::make_unique<Circle>(x, y, size, vx, vy));
+				SHAPES.push_back(std::make_unique<Circle>(c));
 			}
 		}
 		else
