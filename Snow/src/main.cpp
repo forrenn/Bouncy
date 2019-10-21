@@ -21,7 +21,7 @@ void main()
 	SCREEN_WIDTH = DEFAULT_SCREEN_WIDTH;
 	SCREEN_HEIGHT = DEFAULT_SCREEN_HEIGHT;
 	int benchmarkPasses = 1;
-	int benchmarkVisible = 1;  //benchmarkVisible is a misnomer. It is just a visibiliy switch, turned on by default, but option to change it is only given in benchmark mode;
+	int visibility = 1;
 	if (benchmarkMode)
 	{
 		SCREEN_WIDTH = BENCHMARK_DEFAULT_SCREEN_WIDTH;
@@ -29,7 +29,7 @@ void main()
 		std::cout << "Benchmark passes: ";
 		std::cin >> benchmarkPasses;
 		std::cout << "Render to the screen? 1 = yes, 0 = no: ";
-		std::cin >> benchmarkVisible;
+		std::cin >> visibility;
 	}
 	else
 	{
@@ -83,7 +83,7 @@ void main()
 		auto applicationStartTime = startTime;
 		while (running)
 		{
-			if (benchmarkVisible) SDL_FillRect(windowSurface, 0, 0);
+			if (visibility) SDL_FillRect(windowSurface, 0, 0);
 			while (SDL_PollEvent(&ev))
 			{
 				if (ev.type == SDL_QUIT) return;
@@ -102,7 +102,7 @@ void main()
 				bool remove = false; //maybe refactor into std::vector<uint8_t> (bool won't play nice with euthanasia-like ask for removal) and handle removal post-frame for ease of multithreading?
 				SHAPES[i]->euthanasiaPlug = &remove;
 				SHAPES[i]->update(dtLocal);
-				if (benchmarkVisible) SHAPES[i]->draw(windowSurface);
+				if (visibility) SHAPES[i]->draw(windowSurface);
 
 				if (remove)
 				{
@@ -117,7 +117,7 @@ void main()
 				avg_vy_acc += abs(it->vy);
 			std::cout << "Avg |vy|: " << avg_vy_acc / SHAPES.size() << "\n";*/
 
-			if (benchmarkVisible) SDL_UpdateWindowSurface(window);
+			if (visibility) SDL_UpdateWindowSurface(window);
 			++frameCounter;
 			fpsCounterAccumulator += dt;
 			if (fpsCounterAccumulator >= FPS_COUNTER_REFRESH_INTERVAL)
