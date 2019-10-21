@@ -10,6 +10,7 @@ struct Color
 
 struct Shape
 {
+	Shape() = default;
 	double x = 0, y = 0;
 	double vx = 0, vy = 0;
 	double size = 0;

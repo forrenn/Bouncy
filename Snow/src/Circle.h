@@ -2,6 +2,7 @@
 #include "Shape.h"
 struct Circle : Shape
 {
+	Circle() = default;
 	Circle(double x, double y, double r);
 	Circle(double x, double y, double r, double vx, double vy);
 
