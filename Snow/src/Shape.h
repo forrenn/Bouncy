@@ -35,6 +35,7 @@ struct Shape
 	double momentum();
 
 	void markForDeletion();
+	double getLastUpdateGravityVyDelta();
 protected:
 	double lastUpdateGravityVyDelta = 0; 
 };

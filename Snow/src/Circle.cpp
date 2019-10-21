@@ -68,7 +68,7 @@ void Circle::onWallCollision()
 			double y_mult = sin(angle);
 			piece.vx = vx * x_mult;
 			piece.vy = vy * y_mult;
-			shapes.push_back(std::make_unique<Rectangle>(piece));
+			shapes.push_back(std::make_shared<Rectangle>(piece));
 		}
 
 		size -= sqrt(piecesTrunc);*/

@@ -10,12 +10,12 @@ void Shape::updatePos(double dt)
 {
 	if (!isActive) return;
 
-	/*if ((abs(vx) + abs(vy)) < SPEED_CUTOFF && (abs(y)+abs(size)) < 1)
+	if ((abs(vx) + abs(vy)) < SPEED_CUTOFF+abs(lastUpdateGravityVyDelta) && (abs(y)+abs(lastUpdateGravityVyDelta)+abs(size)) > (SCREEN_HEIGHT-1))
 	{
 		this->isActive = false;
 		vx = 0;
 		vy = 0;
-	}*/
+	}
 
 	lastUpdateGravityVyDelta = GRAVITY * gravityMult * dt;
 	vy += lastUpdateGravityVyDelta; //gravity
@@ -99,4 +99,9 @@ double Shape::momentum()
 void Shape::markForDeletion()
 {
 	*euthanasiaPlug = true;
+}
+
+double Shape::getLastUpdateGravityVyDelta()
+{
+	return lastUpdateGravityVyDelta;
 }
